@@ -1104,11 +1104,32 @@ def forgot_password(
     db.add(otp_record)
     db.commit()
 
+    body = f"""
+Hi,
+
+We received a request to reset your College Predictor account password.
+
+Your One-Time Password (OTP) is: {otp}
+
+This OTP is valid for 10 minutes.
+
+If you did not request a password reset, please ignore this email.
+
+Regards,
+
+College Predictor Team
+"""
+
+    send_email(
+        receiver_email=request.email,
+        subject="College Predictor Password Reset OTP",
+        body=body
+)
+
     return {
         "success": True,
-        "message": "OTP generated successfully",
-        "otp": otp
-    }
+        "message": "OTP sent to your registered email."
+}
 
 @app.post("/verify-otp")
 def verify_otp(
