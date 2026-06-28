@@ -4,7 +4,10 @@ from sqlalchemy import and_
 from backend.location_map import location_map
 from backend.security import create_access_token
 from backend.branch_map import branch_map
-from backend.email_utils import send_email
+from backend.email_utils import (
+    send_email,
+    SUPPORT_EMAIL
+)
 from pydantic import BaseModel
 import random
 from datetime import timedelta
@@ -35,7 +38,15 @@ security = HTTPBearer()
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(
+    title="College Predictor API",
+    description="Backend API for College Predictor built using FastAPI and MySQL.",
+    version="1.0.0",
+    contact={
+        "name": "Achyut Chaudhari",
+        "email": "achyutchaudhari78@gmail.com"
+    }
+)
 
 class SignupRequest(BaseModel):
     name: str
@@ -70,6 +81,12 @@ def get_current_user(
 
     payload = decode_token(token)
 
+    if payload is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token"
+        )
+
     user = (
         db.query(User)
         .filter(User.id == payload["user_id"])
@@ -85,7 +102,10 @@ def get_current_user(
     return user
 
 
-@app.get("/")
+@app.get(
+    "/",
+    tags=["General"]
+)
 def home():
     return {
         "message": "College Predictor API Running"
@@ -94,7 +114,10 @@ def home():
 
 
 
-@app.get("/branches")
+@app.get(
+    "/branches",
+    tags=["College Predictor"]
+)
 def get_branches(
     search: str,
     db: Session = Depends(get_db)
@@ -113,7 +136,10 @@ def get_branches(
 
     return branch_list[:10]
 
-@app.get("/categories")
+@app.get(
+    "/categories",
+    tags=["College Predictor"]
+)
 def get_categories(search: str = ""):
 
     categories = [
@@ -138,7 +164,10 @@ def get_categories(search: str = ""):
 
     return result
 
-@app.get("/search-colleges")
+@app.get(
+    "/search-colleges",
+    tags=["College Predictor"]
+)
 def search_colleges(
     search: str,
     db: Session = Depends(get_db)
@@ -174,11 +203,18 @@ def search_colleges(
 
 
 
-@app.get("/college-details")
+@app.get(
+    "/college-details",
+    tags=["College Predictor"]
+)
 def college_details(
     college_name: str,
     db: Session = Depends(get_db)
 ):
+    college_name = college_aliases.get(
+        college_name.lower(),
+        college_name
+)
 
     records = (
         db.query(
@@ -190,8 +226,8 @@ def college_details(
             CollegeCutoff.college_name == CollegeLocation.college_name
         )
         .filter(
-            CollegeCutoff.college_name == college_name
-        )
+            CollegeCutoff.college_name.ilike(f"%{college_name}%")
+)
         .all()
     )
 
@@ -216,7 +252,10 @@ def college_details(
 
     return result
 
-@app.get("/compare-colleges")
+@app.get(
+    "/compare-colleges",
+    tags=["College Predictor"]
+)
 def compare_colleges():
 
     return {
@@ -390,7 +429,10 @@ college_aliases = {
     "mcoe": "Modern College of Engineering"
 }
 
-@app.get("/colleges")
+@app.get(
+    "/colleges",
+    tags=["College Predictor"]
+)
 def get_colleges(
     percentage: float,
     category: str,
@@ -529,7 +571,10 @@ def get_colleges(
         "safe": safe[:10]
     }
 
-@app.post("/signup")
+@app.post(
+    "/signup",
+    tags=["Authentication"]
+)
 def signup(
     user: SignupRequest,
     db: Session = Depends(get_db)
@@ -579,49 +624,184 @@ def signup(
     db.commit()
 
     body = f"""
-Hi {new_user.name},
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }}
 
-Welcome to College Predictor!
+        .container {{
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }}
 
-Your account has been created successfully, and we're excited to have you with us.
+        .header {{
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }}
 
-This platform was built to help students make informed college admission decisions based on their diploma percentage, category, branch preferences, and location.
+        .content {{
+            padding: 30px;
+            color: #333;
+            line-height: 1.7;
+        }}
 
-As a Direct Second Year (DSE) engineering student at VJTI, Mumbai, I experienced firsthand how competitive the admission process can be. Since DSE has significantly fewer seats than First Year Engineering admissions, securing the best possible college in the very first CAP round is often crucial. Waiting for later rounds can greatly reduce the available options.
+        .features {{
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }}
 
-That experience inspired me to build College Predictor—to provide students with accurate predictions, helping them identify Dream, Target, and Safe colleges so they can make confident decisions during counselling.
+        .footer {{
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #777;
+            background: #f1f5f9;
+        }}
 
-With your account, you can now:
-• Predict Dream, Target, and Safe colleges.
-• Save your favourite colleges.
-• View your previous search history.
-• Receive personalized college recommendations.
+        .highlight {{
+            color: #2563eb;
+            font-weight: bold;
+        }}
+    </style>
+</head>
 
-I hope this platform helps you make one of the most important decisions of your engineering journey.
+<body>
 
-Thank you for choosing College Predictor.
+<div class="container">
 
-Best wishes,
+<div class="header">
+<h1>🎓 College Predictor</h1>
+<p>Welcome to the Community!</p>
+</div>
 
-Achyut Chaudhari
-Direct Second Year (DSE) Student
-VJTI, Mumbai
+<div class="content">
 
-College Predictor Team
+<h2>Hello {new_user.name}, 👋</h2>
+
+<p>
+Your account has been created successfully.
+Thank you for joining <span class="highlight">College Predictor</span>.
+</p>
+
+<p>
+This platform helps Diploma students find the best engineering colleges based on:
+</p>
+
+<div class="features">
+
+✅ Diploma Percentage<br>
+✅ Category<br>
+✅ Preferred Branch<br>
+✅ Preferred Location<br>
+✅ Dream / Target / Safe Analysis
+
+</div>
+
+<h3>Why was this platform created?</h3>
+
+<p>
+As a <b>Direct Second Year (DSE)</b> engineering student at
+<b>VJTI, Mumbai</b>, I experienced how competitive DSE admissions are.
+With very limited seats available, securing the right college in the
+<b>first CAP round</b> can make a huge difference.
+</p>
+
+<p>
+That experience inspired me to build this platform so students can make
+better admission decisions using accurate college predictions instead of
+guesswork.
+</p>
+
+<h3>Your account allows you to:</h3>
+
+<ul>
+<li>Predict Dream, Target & Safe Colleges</li>
+<li>Save Favourite Colleges</li>
+<li>Access Search History</li>
+<li>Receive Personalized Recommendations</li>
+</ul>
+
+<p>
+I hope this platform helps you secure the best college for your future.
+</p>
+
+<p>
+Thank you for trusting College Predictor.
+</p>
+
+<hr style="border:none;border-top:1px solid #d1d5db;margin:30px 0;">
+
+<h3 style="color:#2563eb;margin-bottom:10px;">
+Need Help?
+</h3>
+
+<p style="font-size:15px;color:#555;line-height:1.6;">
+
+If you have any questions, suggestions, or encounter any issues while using College Predictor, feel free to contact us.
+
+<br><br>
+
+📧 <b>Email:</b>
+<a href="mailto:{SUPPORT_EMAIL}" style="color:#2563eb;text-decoration:none;">
+{SUPPORT_EMAIL}
+</a>
+
+</p>
+
+<hr style="border:none;border-top:1px solid #d1d5db;margin:30px 0;">
+
+<p style="text-align:center;font-size:14px;color:#777;">
+
+<b>Best Wishes,</b><br><br>
+
+Achyut Chaudhari<br>
+Direct Second Year (DSE)<br>
+VJTI, Mumbai<br><br>
+
+<b>College Predictor Team</b><br><br>
+
+© 2026 College Predictor<br>
+Helping Diploma Students Make Better Admission Decisions
+
+</p>
+
+</div>
+
+</body>
+</html>
 """
-
-    send_email(
-        receiver_email=new_user.email,
-        subject="Welcome to College Predictor 🎉",
-        body=body
-)
+    try:
+        send_email(
+            receiver_email=new_user.email,
+            subject="Welcome to College Predictor 🎉",
+            body=body
+    )
+    except Exception as e:
+        print(f"Welcome Email Error: {e}")
 
     return {
         "success": True,
         "message": "Account created successfully"
 }
 
-@app.post("/login")
+@app.post(
+    "/login",
+    tags=["Authentication"]
+)
 def login(
     user: LoginRequest,
     db: Session = Depends(get_db)
@@ -698,7 +878,10 @@ def admin_required(
     return current_user
     
 
-@app.get("/users")
+@app.get(
+    "/users",
+    tags=["Admin"]
+)
 def get_users(
     admin = Depends(admin_required),
     db: Session = Depends(get_db)
@@ -723,7 +906,10 @@ def get_users(
 
     return result
 
-@app.get("/stats")
+@app.get(
+    "/stats",
+    tags=["Admin"]
+)
 def get_stats(
     admin = Depends(admin_required),
     db: Session = Depends(get_db)
@@ -749,7 +935,10 @@ def get_stats(
         "total_students": total_students
     }
 
-@app.get("/recent-users")
+@app.get(
+    "/recent-users",
+    tags=["Admin"]
+)
 def recent_users(
     admin = Depends(admin_required),
     db: Session = Depends(get_db)
@@ -776,7 +965,10 @@ def recent_users(
 
     return result
 
-@app.get("/recent-logins")
+@app.get(
+    "/recent-logins",
+    tags=["Admin"]
+)
 def recent_logins(
     admin = Depends(admin_required),
     db: Session = Depends(get_db)
@@ -804,13 +996,19 @@ def recent_logins(
 
     return result
 
-@app.get("/me")
+@app.get(
+    "/me",
+    tags=["Authentication"]
+)
 def me(
     current_user = Depends(get_current_user)
 ):
     return current_user
 
-@app.get("/my-history")
+@app.get(
+    "/my-history",
+    tags=["Search History"]
+)
 def my_history(
     current_user = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -844,7 +1042,10 @@ def my_history(
 
     return result
 
-@app.post("/save-college")
+@app.post(
+    "/save-college",
+    tags=["Favorites"]
+)
 def save_college(
     college_name: str,
     branch: str,
@@ -873,7 +1074,10 @@ def save_college(
         "message": "College saved successfully"
     }
 
-@app.get("/my-favorites")
+@app.get(
+    "/my-favorites",
+    tags=["Favorites"]
+)
 def my_favorites(
     current_user = Depends(get_current_user),
     db: Session = Depends(get_db)
@@ -907,7 +1111,10 @@ def my_favorites(
 
     return result
 
-@app.delete("/remove-favorite/{favorite_id}")
+@app.delete(
+    "/remove-favorite/{favorite_id}",
+    tags=["Favorites"]
+)
 def remove_favorite(
     favorite_id: int,
     current_user = Depends(get_current_user),
@@ -938,7 +1145,10 @@ def remove_favorite(
         "message": "Favorite removed"
     }
 
-@app.delete("/admin/user/{user_id}")
+@app.delete(
+    "/admin/user/{user_id}",
+    tags=["Admin"]
+)
 def delete_user(
     user_id: int,
     admin = Depends(admin_required),
@@ -971,7 +1181,10 @@ def delete_user(
         "message": "User deleted successfully"
     }
 
-@app.put("/admin/disable-user/{user_id}")
+@app.put(
+    "/admin/disable-user/{user_id}",
+    tags=["Admin"]
+)
 def disable_user(
     user_id: int,
     admin = Depends(admin_required),
@@ -1006,7 +1219,10 @@ def disable_user(
         "message": f"{user.name} disabled successfully"
     }
 
-@app.put("/admin/enable-user/{user_id}")
+@app.put(
+    "/admin/enable-user/{user_id}",
+    tags=["Admin"]
+)
 def enable_user(
     user_id: int,
     admin = Depends(admin_required),
@@ -1034,7 +1250,10 @@ def enable_user(
         "message": f"{user.name} enabled successfully"
     }
 
-@app.put("/admin/change-role/{user_id}")
+@app.put(
+    "/admin/change-role/{user_id}",
+    tags=["Admin"]
+)
 def change_role(
     user_id: int,
     role_data: RoleUpdate,
@@ -1069,7 +1288,10 @@ def change_role(
         "message": f"{user.name} role changed to {role_data.role}"
     }
 
-@app.post("/forgot-password")
+@app.post(
+    "/forgot-password",
+    tags=["Authentication"]
+)
 def forgot_password(
     request: ForgotPasswordRequest,
     db: Session = Depends(get_db)
@@ -1120,18 +1342,30 @@ Regards,
 College Predictor Team
 """
 
-    send_email(
-        receiver_email=request.email,
-        subject="College Predictor Password Reset OTP",
-        body=body
+    try:
+        send_email(
+            receiver_email=request.email,
+            subject="College Predictor Password Reset OTP",
+            body=body
+    )
+
+        return {
+            "success": True,
+            "message": "OTP sent to your registered email."
+    }
+
+    except Exception as e:
+        print(f"Password Reset Email Error: {e}")
+
+        return {
+            "success": False,
+            "message": "Unable to send OTP email. Please try again later."
+    }
+
+@app.post(
+    "/verify-otp",
+    tags=["Authentication"]
 )
-
-    return {
-        "success": True,
-        "message": "OTP sent to your registered email."
-}
-
-@app.post("/verify-otp")
 def verify_otp(
     request: VerifyOTPRequest,
     db: Session = Depends(get_db)
@@ -1168,7 +1402,10 @@ def verify_otp(
         "message": "OTP verified successfully"
     }
 
-@app.post("/reset-password")
+@app.post(
+    "/reset-password",
+    tags=["Authentication"]
+)
 def reset_password(
     request: ResetPasswordRequest,
     db: Session = Depends(get_db)
@@ -1221,29 +1458,4 @@ def reset_password(
     return {
         "success": True,
         "message": "Password reset successfully"
-    }
-
-@app.get("/test-email")
-def test_email():
-
-    body = """
-Hi dhanshri,
-
-This is a test email from College Predictor.
-
-If you received this email, your Gmail SMTP configuration is working correctly.
-
-Regards,
-College Predictor Team
-"""
-
-    send_email(
-        receiver_email="dhanshripchaudhari@gmail.com",
-        subject="College Predictor - Test Email",
-        body=body
-    )
-
-    return {
-        "success": True,
-        "message": "Test email sent successfully"
     }

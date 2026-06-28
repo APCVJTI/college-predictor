@@ -1,8 +1,8 @@
 import os
 import smtplib
 
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 from dotenv import load_dotenv
 
@@ -11,6 +11,7 @@ load_dotenv()
 
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+SUPPORT_EMAIL = os.getenv("SUPPORT_EMAIL")
 
 
 def send_email(
@@ -19,14 +20,28 @@ def send_email(
     body: str
 ):
 
-    message = MIMEMultipart()
+    message = MIMEMultipart("alternative")
 
-    message["From"] = EMAIL_ADDRESS
+    message["From"] = f"College Predictor Team <{EMAIL_ADDRESS}>"
     message["To"] = receiver_email
     message["Subject"] = subject
 
+    plain_text = """
+Welcome to College Predictor!
+
+If your email client cannot display HTML,
+please open this email in another email application.
+
+Regards,
+College Predictor Team
+"""
+
     message.attach(
-        MIMEText(body, "plain")
+        MIMEText(plain_text, "plain")
+    )
+
+    message.attach(
+        MIMEText(body, "html")
     )
 
     with smtplib.SMTP(
