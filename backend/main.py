@@ -5,6 +5,8 @@ from backend.location_map import location_map
 from backend.security import create_access_token
 from backend.branch_map import branch_map
 from pydantic import BaseModel
+import random
+from datetime import timedelta
 from fastapi import Header
 from fastapi import HTTPException
 from fastapi.security import HTTPBearer
@@ -25,7 +27,8 @@ from backend.models import (
     CollegeLocation,
     User,
     SearchHistory,
-    FavoriteCollege
+    FavoriteCollege,
+    PasswordOTP
 )
 security = HTTPBearer()
 
@@ -44,6 +47,13 @@ class LoginRequest(BaseModel):
 
 class RoleUpdate(BaseModel):
     role: str
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class VerifyOTPRequest(BaseModel):
+    email: str
+    otp: str
 
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
@@ -1013,4 +1023,45 @@ def change_role(
     return {
         "success": True,
         "message": f"{user.name} role changed to {role_data.role}"
+    }
+
+@app.post("/forgot-password")
+def forgot_password(
+    request: ForgotPasswordRequest,
+    db: Session = Depends(get_db)
+):
+
+    user = (
+        db.query(User)
+        .filter(User.email == request.email)
+        .first()
+    )
+
+    if not user:
+        return {
+            "success": False,
+            "message": "Email not registered"
+        }
+
+    otp = str(random.randint(100000, 999999))
+
+    expires = datetime.utcnow() + timedelta(minutes=10)
+
+    db.query(PasswordOTP).filter(
+        PasswordOTP.email == request.email
+    ).delete()
+
+    otp_record = PasswordOTP(
+        email=request.email,
+        otp=otp,
+        expires_at=expires
+    )
+
+    db.add(otp_record)
+    db.commit()
+
+    return {
+        "success": True,
+        "message": "OTP generated successfully",
+        "otp": otp
     }
