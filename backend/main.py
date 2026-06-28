@@ -4,6 +4,7 @@ from sqlalchemy import and_
 from backend.location_map import location_map
 from backend.security import create_access_token
 from backend.branch_map import branch_map
+from backend.email_utils import send_email
 from pydantic import BaseModel
 import random
 from datetime import timedelta
@@ -577,10 +578,48 @@ def signup(
     db.add(new_user)
     db.commit()
 
+    body = f"""
+Hi {new_user.name},
+
+Welcome to College Predictor!
+
+Your account has been created successfully, and we're excited to have you with us.
+
+This platform was built to help students make informed college admission decisions based on their diploma percentage, category, branch preferences, and location.
+
+As a Direct Second Year (DSE) engineering student at VJTI, Mumbai, I experienced firsthand how competitive the admission process can be. Since DSE has significantly fewer seats than First Year Engineering admissions, securing the best possible college in the very first CAP round is often crucial. Waiting for later rounds can greatly reduce the available options.
+
+That experience inspired me to build College Predictor—to provide students with accurate predictions, helping them identify Dream, Target, and Safe colleges so they can make confident decisions during counselling.
+
+With your account, you can now:
+• Predict Dream, Target, and Safe colleges.
+• Save your favourite colleges.
+• View your previous search history.
+• Receive personalized college recommendations.
+
+I hope this platform helps you make one of the most important decisions of your engineering journey.
+
+Thank you for choosing College Predictor.
+
+Best wishes,
+
+Achyut Chaudhari
+Direct Second Year (DSE) Student
+VJTI, Mumbai
+
+College Predictor Team
+"""
+
+    send_email(
+        receiver_email=new_user.email,
+        subject="Welcome to College Predictor 🎉",
+        body=body
+)
+
     return {
         "success": True,
         "message": "Account created successfully"
-    }
+}
 
 @app.post("/login")
 def login(
@@ -1161,4 +1200,29 @@ def reset_password(
     return {
         "success": True,
         "message": "Password reset successfully"
+    }
+
+@app.get("/test-email")
+def test_email():
+
+    body = """
+Hi dhanshri,
+
+This is a test email from College Predictor.
+
+If you received this email, your Gmail SMTP configuration is working correctly.
+
+Regards,
+College Predictor Team
+"""
+
+    send_email(
+        receiver_email="dhanshripchaudhari@gmail.com",
+        subject="College Predictor - Test Email",
+        body=body
+    )
+
+    return {
+        "success": True,
+        "message": "Test email sent successfully"
     }
