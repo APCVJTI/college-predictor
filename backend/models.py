@@ -129,3 +129,26 @@ class FavoriteCollege(Base):
     location = Column(String(255))
 
     saved_at = Column(DateTime)
+
+
+class PasswordOTP(Base):
+
+    __tablename__ = "password_otps"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    email = Column(
+        String(100)
+    )
+
+    otp = Column(
+        String(6)
+    )
+
+    expires_at = Column(
+        DateTime
+    )
