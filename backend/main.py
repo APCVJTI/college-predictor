@@ -55,6 +55,11 @@ class VerifyOTPRequest(BaseModel):
     email: str
     otp: str
 
+class ResetPasswordRequest(BaseModel):
+    email: str
+    otp: str
+    new_password: str
+
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
@@ -1064,4 +1069,96 @@ def forgot_password(
         "success": True,
         "message": "OTP generated successfully",
         "otp": otp
+    }
+
+@app.post("/verify-otp")
+def verify_otp(
+    request: VerifyOTPRequest,
+    db: Session = Depends(get_db)
+):
+
+    otp_record = (
+        db.query(PasswordOTP)
+        .filter(
+            PasswordOTP.email == request.email
+        )
+        .first()
+    )
+
+    if not otp_record:
+        return {
+            "success": False,
+            "message": "OTP not found"
+        }
+
+    if otp_record.otp != request.otp:
+        return {
+            "success": False,
+            "message": "Invalid OTP"
+        }
+
+    if datetime.utcnow() > otp_record.expires_at:
+        return {
+            "success": False,
+            "message": "OTP has expired"
+        }
+
+    return {
+        "success": True,
+        "message": "OTP verified successfully"
+    }
+
+@app.post("/reset-password")
+def reset_password(
+    request: ResetPasswordRequest,
+    db: Session = Depends(get_db)
+):
+
+    otp_record = (
+        db.query(PasswordOTP)
+        .filter(
+            PasswordOTP.email == request.email
+        )
+        .first()
+    )
+
+    if not otp_record:
+        return {
+            "success": False,
+            "message": "OTP not found"
+        }
+
+    if otp_record.otp != request.otp:
+        return {
+            "success": False,
+            "message": "Invalid OTP"
+        }
+
+    if datetime.utcnow() > otp_record.expires_at:
+        return {
+            "success": False,
+            "message": "OTP has expired"
+        }
+
+    user = (
+        db.query(User)
+        .filter(User.email == request.email)
+        .first()
+    )
+
+    if not user:
+        return {
+            "success": False,
+            "message": "User not found"
+        }
+
+    user.password = hash_password(request.new_password)
+
+    db.delete(otp_record)
+
+    db.commit()
+
+    return {
+        "success": True,
+        "message": "Password reset successfully"
     }
