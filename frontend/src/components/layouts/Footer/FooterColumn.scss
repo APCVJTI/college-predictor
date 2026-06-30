@@ -1,0 +1,59 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ==========================================
+   FOOTER COLUMN
+========================================== */
+
+.footer-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.footer-column__title {
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: white;
+
+  margin-bottom: 22px;
+
+}
+
+.footer-column__list {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+}
+
+.footer-column__item {
+
+  color: rgba(255,255,255,.75);
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+}
+
+.footer-column__item:hover {
+
+  color: white;
+
+  transform: translateX(6px);
+
+}

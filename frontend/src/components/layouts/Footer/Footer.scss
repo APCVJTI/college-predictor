@@ -1,0 +1,243 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer {
+
+  background: #0F172A;
+
+  color: white;
+
+  padding-top: 80px;
+
+  margin-top: 120px;
+
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.footer__container {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  padding: 0 40px 60px;
+
+  display: grid;
+
+  grid-template-columns: 1.2fr 2fr;
+
+  gap: 80px;
+
+}
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.footer__brand {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.footer__description {
+
+  margin: 28px 0;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.72);
+
+  max-width: 340px;
+
+}
+
+/* ==========================================================
+   SOCIALS
+========================================================== */
+
+.footer__socials {
+
+  display: flex;
+
+  gap: 16px;
+
+}
+
+.footer__social {
+
+  width: 46px;
+
+  height: 46px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+
+  text-decoration: none;
+
+  transition: all .3s ease;
+
+}
+
+.footer__social:hover {
+
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  transform: translateY(-4px);
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.footer__links {
+
+  display: grid;
+
+  grid-template-columns: repeat(3,1fr);
+
+  gap: 40px;
+
+}
+
+/* ==========================================================
+   BOTTOM
+========================================================== */
+
+.footer__bottom {
+
+  border-top: 1px solid rgba(255,255,255,.08);
+
+  max-width: 1280px;
+
+  margin: auto;
+
+  padding: 28px 40px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+.footer__bottom p {
+
+  color: rgba(255,255,255,.65);
+
+}
+
+.footer__top {
+
+  width: 50px;
+
+  height: 50px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  color: white;
+
+  font-size: 1rem;
+
+  transition: all .3s ease;
+
+}
+
+.footer__top:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 15px 35px rgba(37,99,235,.35);
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .footer__container {
+
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+  }
+
+  .footer__links {
+
+    grid-template-columns: repeat(2,1fr);
+
+  }
+
+}
+
+@media (max-width:768px) {
+
+  .footer {
+
+    margin-top: 90px;
+
+  }
+
+  .footer__container {
+
+    padding: 0 24px 50px;
+
+  }
+
+  .footer__links {
+
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+
+  }
+
+  .footer__bottom {
+
+    padding: 24px;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    text-align: center;
+
+  }
+
+}

@@ -4,6 +4,7 @@ import WhyUs from "./components/home/WhyUs/WhyUs";
 import Features from "./components/home/Features/Features";
 import HowItWorks from "./components/home/HowItWorks/HowItWorks";
 import FAQ from "./components/home/FAQ/FAQ";
+import Footer from "./components/layouts/Footer/Footer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Features />
       <HowItWorks />
       <FAQ />
+      <Footer />
     </>
   );
 }
