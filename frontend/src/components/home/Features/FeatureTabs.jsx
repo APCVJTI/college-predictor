@@ -9,9 +9,8 @@ function FeatureTabs({ features, activeFeature, setActiveFeature }) {
         <span>Explore Features</span>
 
         <h3>
-          Everything you need for
-          <br />
-          smarter college decisions.
+            Everything you need for
+            smarter college decisions.
         </h3>
 
       </div>
