@@ -1,0 +1,227 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ==========================================
+   FEATURE PREVIEW
+========================================== */
+
+.feature-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-preview__window {
+  width: 100%;
+  max-width: 560px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(37, 99, 235, 0.08);
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
+
+  transition: all .35s ease;
+}
+
+/* ==========================================
+   TOP BAR
+========================================== */
+
+.feature-preview__topbar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 18px 24px;
+
+  border-bottom: 1px solid rgba(15,23,42,.06);
+
+  background: rgba(248,250,252,.8);
+
+}
+
+.dots {
+
+  display: flex;
+
+  gap: 8px;
+
+}
+
+.dots span {
+
+  width: 10px;
+
+  height: 10px;
+
+  border-radius: 50%;
+
+}
+
+.dots span:nth-child(1) {
+
+  background: #EF4444;
+
+}
+
+.dots span:nth-child(2) {
+
+  background: #F59E0B;
+
+}
+
+.dots span:nth-child(3) {
+
+  background: #10B981;
+
+}
+
+.feature-preview__topbar p {
+
+  font-size: .95rem;
+
+  font-weight: 600;
+
+  color: $text-secondary;
+
+}
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.feature-preview__content {
+
+  padding: 40px;
+
+}
+
+.preview-tag {
+
+  display: inline-block;
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  background: rgba(37,99,235,.08);
+
+  color: $primary;
+
+  font-weight: 600;
+
+  margin-bottom: 24px;
+
+}
+
+.feature-preview__content h2 {
+
+  font-size: 2.3rem;
+
+  color: $text-primary;
+
+  margin-bottom: 20px;
+
+}
+
+.feature-preview__content p {
+
+  line-height: 1.8;
+
+  color: $text-secondary;
+
+  margin-bottom: 36px;
+
+}
+
+/* ==========================================
+   INFO BOXES
+========================================== */
+
+.preview-info {
+
+  display: grid;
+
+  grid-template-columns: repeat(2,1fr);
+
+  gap: 18px;
+
+  margin-bottom: 36px;
+
+}
+
+.preview-box {
+
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background: #F8FAFC;
+
+  border: 1px solid rgba(37,99,235,.06);
+
+}
+
+.preview-box h4 {
+
+  color: $primary;
+
+  font-size: 1.1rem;
+
+  margin-bottom: 10px;
+
+}
+
+.preview-box span {
+
+  color: $text-secondary;
+
+  font-size: .95rem;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:992px){
+
+.feature-preview{
+
+margin-top:60px;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.feature-preview__content{
+
+padding:30px;
+
+}
+
+.preview-info{
+
+grid-template-columns:1fr;
+
+}
+
+.feature-preview__content h2{
+
+font-size:2rem;
+
+}
+
+}

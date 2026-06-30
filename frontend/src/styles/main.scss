@@ -1,15 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@use "./abstracts/variables" as *;
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8fafc;
-  color: #1f2937;
-}
-
-#root {
-  min-height: 100vh;
+body{
+  margin:0;
+  font-family:$font-family;
+  background:$background;
 }

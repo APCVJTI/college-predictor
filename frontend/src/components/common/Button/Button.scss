@@ -1,0 +1,93 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  border-radius: 999px;
+
+  font-family: $font-family;
+  font-weight: 600;
+
+  transition: all .3s ease;
+
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+  }
+}
+
+/* Primary */
+
+.btn--primary {
+  background: $primary;
+  color: white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #1D4ED8;
+  }
+}
+
+/* Secondary */
+
+.btn--secondary {
+  background: white;
+  color: $primary;
+  border: 1px solid #E2E8F0;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #F8FAFC;
+  }
+}
+
+/* Sizes */
+
+.btn--sm {
+  padding: .7rem 1.2rem;
+  font-size: .9rem;
+}
+
+.btn--md {
+  padding: .9rem 1.8rem;
+  font-size: 1rem;
+}
+
+.btn--lg {
+  padding: 1rem 2.3rem;
+  font-size: 1.05rem;
+}
+
+/* Width */
+
+.btn--full {
+  width: 100%;
+}
+
+/* Loader */
+
+.btn__loader {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255,255,255,.3);
+  border-top: 2px solid white;
+
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

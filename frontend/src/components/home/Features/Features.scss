@@ -1,0 +1,86 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ===================================================
+   FEATURES
+=================================================== */
+
+.features {
+  padding: 120px 0;
+  background: linear-gradient(
+    180deg,
+    #F8FAFC 0%,
+    #FFFFFF 100%
+  );
+}
+
+/* ===================================================
+   CONTAINER
+=================================================== */
+
+.features__container {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  padding: 0 40px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 80px;
+
+  align-items: center;
+
+}
+
+/* ===================================================
+   LEFT
+=================================================== */
+
+.features__left{
+
+display:flex;
+
+align-items:center;
+
+}
+
+/* ===================================================
+   RIGHT
+=================================================== */
+
+.features__right{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:992px){
+
+.features{
+
+padding:90px 0;
+
+}
+
+.features__container{
+
+grid-template-columns:1fr;
+
+gap:60px;
+
+padding:0 24px;
+
+}
+
+}

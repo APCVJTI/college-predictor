@@ -1,0 +1,150 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.prediction-card {
+
+    width: 420px;
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 32px;
+
+    background: rgba(255,255,255,.95);
+
+    backdrop-filter: blur(20px);
+
+    border:1px solid rgba(37,99,235,.08);
+
+    box-shadow:
+    0 25px 70px rgba(37,99,235,.10);
+
+}
+
+.prediction-card__header{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:28px;
+
+}
+
+.live-dot{
+
+  width:10px;
+
+  height:10px;
+
+  border-radius:50%;
+
+  background:#10B981;
+
+}
+
+.prediction-card__header p{
+
+  color:$text-secondary;
+
+  font-weight:600;
+
+}
+
+.prediction-card__percentage{
+
+  font-size:4rem;
+
+  font-weight:800;
+
+  text-align:center;
+
+  margin-bottom:28px;
+
+background: linear-gradient(
+  90deg,
+  #2563EB,
+  #0EA5E9
+);
+
+background-clip: text;
+-webkit-background-clip: text;
+
+color: transparent;
+-webkit-text-fill-color: transparent;
+
+}
+
+.prediction-card__divider{
+
+  height:1px;
+
+  background:#EEF2F7;
+
+  margin:22px 0;
+
+}
+
+.prediction-section h3{
+
+  font-size:1rem;
+
+  margin-bottom:16px;
+
+  color:$text-primary;
+
+}
+
+.college{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:10px 0;
+
+  color:$text-secondary;
+
+}
+
+.college svg{
+
+  color:#2563EB;
+
+}
+
+.prediction-card__footer{
+
+  margin-top:28px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:10px;
+
+  color:#10B981;
+
+  font-size:.9rem;
+
+  font-weight:600;
+
+}
+
+@media(max-width:992px){
+
+.prediction-card{
+
+width:100%;
+
+max-width:420px;
+
+}
+
+}

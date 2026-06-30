@@ -1,0 +1,268 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ======================================================
+   NAVBAR
+====================================================== */
+
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: min(95%, 1280px);
+
+  z-index: 1000;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  border-radius: 22px;
+
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+
+  transition: all .35s ease;
+}
+
+/* -------------------------------- */
+
+.navbar--scrolled {
+
+  top: 12px;
+
+  background: rgba(255,255,255,.94);
+
+  box-shadow: 0 18px 45px rgba(15,23,42,.12);
+
+}
+
+/* ======================================================
+   CONTAINER
+====================================================== */
+
+.navbar__container {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:18px 32px;
+
+}
+
+/* ======================================================
+   NAV LINKS
+====================================================== */
+
+.navbar__links{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:38px;
+
+}
+
+.navbar__link{
+
+  text-decoration:none;
+
+  color:$text-primary;
+
+  font-size:.97rem;
+
+  font-weight:600;
+
+  transition:.3s;
+
+  position:relative;
+
+}
+
+.navbar__link:hover{
+
+  color:$primary;
+
+}
+
+.navbar__link::after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:-8px;
+
+  left:50%;
+
+  width:0;
+
+  height:2px;
+
+  background:$primary;
+
+  transition:.3s;
+
+  transform:translateX(-50%);
+
+}
+
+.navbar__link:hover::after{
+
+  width:100%;
+
+}
+
+/* Active Link */
+
+.navbar__link.active{
+
+  color:$primary;
+
+}
+
+/* ======================================================
+   ACTIONS
+====================================================== */
+
+.navbar__actions{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+}
+
+.navbar__login{
+
+  color:$text-primary;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+  transition:.3s;
+
+}
+
+.navbar__login:hover{
+
+  color:$primary;
+
+}
+
+/* ======================================================
+   MOBILE BUTTON
+====================================================== */
+
+.navbar__toggle{
+
+  display:none;
+
+  border:none;
+
+  background:none;
+
+  cursor:pointer;
+
+  font-size:2rem;
+
+  color:$text-primary;
+
+}
+
+/* ======================================================
+   MOBILE MENU
+====================================================== */
+
+.navbar__mobile{
+
+  display:none;
+
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media(max-width:992px){
+
+  .navbar{
+
+    width:95%;
+
+  }
+
+  .navbar__links{
+
+    display:none;
+
+  }
+
+  .navbar__actions{
+
+    display:none;
+
+  }
+
+  .navbar__toggle{
+
+    display:block;
+
+  }
+
+  .navbar__mobile{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:25px 32px;
+
+    border-top:1px solid rgba(0,0,0,.06);
+
+  }
+
+  .navbar__mobile-link{
+
+    text-decoration:none;
+
+    color:$text-primary;
+
+    font-weight:600;
+
+  }
+
+  .navbar__mobile-login{
+
+    text-decoration:none;
+
+    color:$text-primary;
+
+    font-weight:600;
+
+  }
+
+}
+
+@media(max-width:576px){
+
+  .navbar__container{
+
+    padding:16px 20px;
+
+  }
+
+}

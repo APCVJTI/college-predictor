@@ -1,0 +1,61 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  text-decoration: none;
+}
+
+.logo__icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: $primary;
+  color: white;
+
+  border-radius: 16px;
+
+  font-size: .95rem;
+  font-weight: 800;
+  letter-spacing: .5px;
+
+  box-shadow: 0 10px 25px rgba(37, 99, 235, .25);
+
+  transition: all .3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.logo__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo__title {
+  margin: 0;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  color: $text-primary;
+
+  line-height: 1.2;
+}
+
+.logo__subtitle {
+  margin: 0;
+
+  font-size: .82rem;
+
+  color: $text-secondary;
+
+  line-height: 1.2;
+}

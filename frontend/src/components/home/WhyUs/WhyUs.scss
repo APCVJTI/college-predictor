@@ -1,0 +1,188 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.why-us {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.why-us__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.why-us__header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.why-us__badge {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+
+  background: rgba(37, 99, 235, 0.08);
+
+  color: $primary;
+
+  font-weight: 600;
+
+  margin-bottom: 20px;
+}
+
+.why-us__header h2 {
+
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+
+  color: $text-primary;
+
+  font-weight: 800;
+
+  margin-bottom: 20px;
+
+}
+
+.why-us__header h2 span {
+
+background: linear-gradient(
+  90deg,
+  #2563EB,
+  #06B6D4
+);
+
+background-clip: text;
+-webkit-background-clip: text;
+
+color: transparent;
+-webkit-text-fill-color: transparent;
+
+}
+
+.why-us__header p {
+
+  max-width: 700px;
+
+  margin: auto;
+
+  color: $text-secondary;
+
+  font-size: 1.1rem;
+
+  line-height: 1.8;
+
+}
+
+.why-us__grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 30px;
+
+}
+
+.why-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 28px;
+
+  border: 1px solid rgba(37,99,235,.08);
+
+  box-shadow: 0 20px 50px rgba(15,23,42,.06);
+
+  transition: .3s ease;
+
+}
+
+.why-card:hover{
+
+transform:translateY(-8px);
+
+border-color:#2563EB;
+
+box-shadow:
+0 25px 60px rgba(37,99,235,.15);
+
+}
+
+.why-card__icon {
+
+  width: 58px;
+
+  height: 58px;
+
+  border-radius: 18px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 24px;
+
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  color: white;
+
+  font-size: 1.4rem;
+
+}
+
+.why-card h3 {
+
+  font-size: 1.3rem;
+
+  color: $text-primary;
+
+  margin-bottom: 16px;
+
+}
+
+.why-card p {
+
+  color: $text-secondary;
+
+  line-height: 1.7;
+
+}
+
+@media (max-width: 1100px) {
+
+  .why-us__grid {
+
+    grid-template-columns: repeat(2,1fr);
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .why-us {
+
+    padding: 80px 0;
+
+  }
+
+  .why-us__container {
+
+    padding: 0 24px;
+
+  }
+
+  .why-us__grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

@@ -1,11 +1,16 @@
+import Navbar from "./components/layouts/Navbar/Navbar";
+import Hero from "./components/home/Hero/Hero";
+import WhyUs from "./components/home/WhyUs/WhyUs";
+import Features from "./components/home/Features/Features";
+
 function App() {
   return (
-    <div className="container py-5">
-      <h1 className="text-primary">College Predictor</h1>
-      <button className="btn btn-primary mt-3">
-        Bootstrap is Working
-      </button>
-    </div>
+    <>
+      <Navbar />
+      <Hero />
+      <WhyUs />
+      <Features />
+    </>
   );
 }
 
