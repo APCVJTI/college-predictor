@@ -1,0 +1,215 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ==========================================
+   FAQ SECTION
+========================================== */
+
+.faq {
+
+  padding: 120px 0;
+
+  background: linear-gradient(
+    180deg,
+    #F8FAFC 0%,
+    #FFFFFF 100%
+  );
+
+}
+
+.faq__container {
+
+  max-width: 950px;
+
+  margin: auto;
+
+  padding: 0 40px;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.faq__header {
+
+  text-align: center;
+
+  margin-bottom: 70px;
+
+}
+
+.faq__badge {
+
+  display: inline-block;
+
+  padding: 12px 22px;
+
+  font-size:.95rem;
+
+  border-radius: 999px;
+
+  background: rgba(37,99,235,.08);
+
+  color: $primary;
+
+  font-weight: 600;
+
+  margin-bottom: 22px;
+
+}
+
+.faq__header h2 {
+
+  font-size: clamp(2.5rem,5vw,3.8rem);
+
+  line-height: 1.15;
+
+  margin-bottom: 20px;
+
+  color: $text-primary;
+
+}
+
+.faq__header span {
+
+  background: linear-gradient(
+    90deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+}
+
+.faq__header p {
+
+  max-width: 680px;
+
+  margin: auto;
+
+  color: $text-secondary;
+
+  font-size: 1.08rem;
+
+  line-height: 1.8;
+
+}
+
+/* ==========================================
+   LIST
+========================================== */
+
+.faq__list {
+
+  margin-bottom: 70px;
+
+}
+
+/* ==========================================
+   CTA
+========================================== */
+
+.faq__cta {
+
+  text-align: center;
+
+  padding: 50px;
+
+  border-radius: 28px;
+
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  color: white;
+
+}
+
+.faq__cta h3 {
+
+  font-size: 2rem;
+
+  margin-bottom: 14px;
+
+}
+
+.faq__cta p {
+
+  max-width: 520px;
+
+  margin: 0 auto 28px;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.9);
+
+}
+
+.faq__button {
+
+  padding: 16px 38px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: white;
+
+  color: $primary;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+}
+
+.faq__button:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 15px 35px rgba(0,0,0,.15);
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+  .faq{
+
+    padding:90px 0;
+
+  }
+
+  .faq__container{
+
+    padding:0 24px;
+
+  }
+
+  .faq__cta{
+
+    padding:35px 24px;
+
+  }
+
+  .faq__header{
+
+    margin-bottom:50px;
+
+  }
+
+}

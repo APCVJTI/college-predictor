@@ -3,6 +3,7 @@ import Hero from "./components/home/Hero/Hero";
 import WhyUs from "./components/home/WhyUs/WhyUs";
 import Features from "./components/home/Features/Features";
 import HowItWorks from "./components/home/HowItWorks/HowItWorks";
+import FAQ from "./components/home/FAQ/FAQ";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <WhyUs />
       <Features />
       <HowItWorks />
+      <FAQ />
     </>
   );
 }

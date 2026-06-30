@@ -1,0 +1,182 @@
+@use "../../../styles/abstracts/variables" as *;
+
+/* ==========================================
+   FAQ ITEM
+========================================== */
+
+.faq-item {
+
+  background: #ffffff;
+
+  border: 1px solid rgba(37, 99, 235, 0.08);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  transition: all .3s ease;
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+
+}
+
+.faq-item + .faq-item {
+
+  margin-top: 20px;
+
+}
+
+.faq-item:hover.faq-item__icon {
+  transform:scale(1.1);
+
+  border-color: rgba(37,99,235,.25);
+
+  transform: translateY(-2px);
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.faq-item__header {
+
+  width: 100%;
+
+  padding: 24px 30px;
+
+  background: transparent;
+
+  border: none;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  cursor: pointer;
+
+  text-align: left;
+
+}
+
+.faq-item__header h3 {
+
+  font-size: 1.3rem;
+
+  font-weight: 600;
+
+  color: $text-primary;
+
+  line-height: 1.5;
+
+  margin: 0;
+
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.faq-item__icon {
+
+  width: 46px;
+
+  height: 46px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: rgba(37,99,235,.08);
+
+  color: $primary;
+
+  flex-shrink: 0;
+
+  transition: .3s ease;
+
+}
+
+.faq-item.active .faq-item__icon {
+
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  color: white;
+
+  transform: rotate(180deg);
+
+}
+
+/* ==========================================
+   CONTENT
+========================================== */
+
+.faq-item__content {
+
+  max-height: 0;
+
+  overflow: hidden;
+
+  transition:
+    max-height .4s ease,
+    padding .4s ease;
+
+  padding: 0 30px;
+
+}
+
+.faq-item__content.show {
+
+  max-height: 220px;
+
+  padding: 0 30px 28px;
+
+}
+
+.faq-item__content p {
+
+  color: $text-secondary;
+
+  line-height: 1.8;
+
+  font-size: 1rem;
+
+  margin: 0;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+  .faq-item__header{
+
+    padding:20px;
+
+  }
+
+  .faq-item__content.show{
+
+    padding:0 20px 20px;
+
+  }
+
+  .faq-item__header h3{
+
+    font-size:1.05rem;
+
+  }
+
+}
