@@ -1,163 +1,213 @@
 @use "../../../styles/abstracts/variables" as *;
 
-/* ==========================================
+/* ==================================================
    STEP CARD
-========================================== */
+================================================== */
 
 .step-card {
 
   position: relative;
 
-  background: #ffffff;
-
-  border: 1px solid rgba(37,99,235,.08);
-
-  border-radius: 24px;
+  overflow: hidden;
 
   padding: 70px 32px 36px;
 
   text-align: center;
 
-  transition: all .35s ease;
+  border-radius: 28px;
 
-  overflow: hidden;
+  background: rgba(255,255,255,.84);
 
-  box-shadow: 0 20px 50px rgba(15,23,42,.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(37,99,235,.08);
+
+  box-shadow:
+    0 20px 60px rgba(15,23,42,.06),
+    0 8px 20px rgba(37,99,235,.04);
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+
+}
+
+/* ==========================================
+   TOP GRADIENT
+========================================== */
+
+.step-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+
+  left:0;
+
+  width:0;
+
+  height:4px;
+
+  background:linear-gradient(
+    90deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  transition:width .35s ease;
 
 }
 
 .step-card:hover{
 
-transform: translateY(-8px);
+  transform:
+    translateY(-10px)
+    scale(1.02);
 
-border-color: $primary;
+  border-color:rgba(37,99,235,.25);
 
-box-shadow: 0 30px 70px rgba(37,99,235,.12);
+  box-shadow:
+    0 30px 80px rgba(15,23,42,.10),
+    0 12px 30px rgba(37,99,235,.10);
 
 }
 
-/* ==========================================
+.step-card:hover::before{
+
+  width:100%;
+
+}
+
+/* ==================================================
    STEP NUMBER
-========================================== */
+================================================== */
 
 .step-card__number{
 
-position:absolute;
+  position:absolute;
 
-top:22px;
+  top:22px;
 
-right:24px;
+  right:24px;
 
-font-size:.95rem;
+  font-size:.9rem;
 
-font-weight:700;
+  font-weight:700;
 
-color:$primary;
+  letter-spacing:1px;
 
-opacity:.9;
+  color:$primary;
 
-letter-spacing:1px;
+  opacity:.85;
 
 }
 
-/* ==========================================
+/* ==================================================
    ICON
-========================================== */
+================================================== */
 
 .step-card__icon{
 
-width:78px;
+  width:78px;
 
-height:78px;
+  height:78px;
 
-margin:0 auto 28px;
+  margin:0 auto 28px;
 
-display:flex;
+  display:flex;
 
-justify-content:center;
+  justify-content:center;
 
-align-items:center;
+  align-items:center;
 
-border-radius:22px;
+  border-radius:22px;
 
-background:linear-gradient(
-135deg,
-#2563EB,
-#06B6D4
-);
+  background:linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
 
-color:white;
+  color:white;
 
-font-size:2rem;
+  font-size:2rem;
 
-box-shadow:0 15px 35px rgba(37,99,235,.20);
+  box-shadow:
+    0 15px 35px rgba(37,99,235,.22);
 
-}
-
-/* ==========================================
-   TITLE
-========================================== */
-
-.step-card h3{
-
-font-size:1.45rem;
-
-font-weight:700;
-
-color:$text-primary;
-
-margin-bottom:18px;
-
-}
-
-/* ==========================================
-   DESCRIPTION
-========================================== */
-
-.step-card p{
-
-font-size:1rem;
-
-line-height:1.8;
-
-color:$text-secondary;
-
-margin:0;
-
-}
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
-
-@media(max-width:768px){
-
-.step-card{
-
-padding:60px 26px 30px;
-
-}
-
-.step-card__icon{
-
-width:68px;
-
-height:68px;
-
-font-size:1.8rem;
-
-}
-
-.step-card__icon{
-
-  transition: transform .35s ease;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
 
 }
 
 .step-card:hover .step-card__icon{
 
-  transform: rotate(-8deg) scale(1.08);
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+
+  box-shadow:
+    0 20px 40px rgba(37,99,235,.30);
 
 }
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.step-card h3{
+
+  font-size:1.42rem;
+
+  font-weight:700;
+
+  color:$text-primary;
+
+  margin-bottom:18px;
+
+}
+
+/* ==================================================
+   DESCRIPTION
+================================================== */
+
+.step-card p{
+
+  font-size:.98rem;
+
+  line-height:1.8;
+
+  color:$text-secondary;
+
+  margin:0;
+
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media(max-width:768px){
+
+  .step-card{
+
+    padding:60px 26px 30px;
+
+  }
+
+  .step-card__icon{
+
+    width:68px;
+
+    height:68px;
+
+    font-size:1.8rem;
+
+  }
 
 }

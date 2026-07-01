@@ -25,7 +25,9 @@ function Footer() {
 
       <div className="footer__container">
 
-        {/* Left Section */}
+        {/* ===========================
+            Left
+        =========================== */}
 
         <div className="footer__brand">
 
@@ -51,6 +53,9 @@ function Footer() {
                   key={index}
                   href={social.link}
                   className="footer__social"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Social Link ${index + 1}`}
                 >
 
                   <Icon />
@@ -65,7 +70,9 @@ function Footer() {
 
         </div>
 
-        {/* Right Section */}
+        {/* ===========================
+            Right
+        =========================== */}
 
         <div className="footer__links">
 
@@ -88,20 +95,44 @@ function Footer() {
 
       </div>
 
-      {/* Bottom */}
+      {/* ===========================
+          Bottom
+      =========================== */}
 
       <div className="footer__bottom">
 
-        <p>
+        <div className="footer__credit">
 
-          © {new Date().getFullYear()} DSE College Predictor.
-          All Rights Reserved.
+          <p className="footer__copyright">
 
-        </p>
+            © {new Date().getFullYear()} DSE College Predictor •
+            All Rights Reserved.
+
+          </p>
+
+          <p className="footer__developer">
+
+            Crafted with ❤️ by{" "}
+
+            <a
+              href="https://www.linkedin.com/in/achyut-chaudhari-8b5880356/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer__developer-link"
+            >
+
+              Achyut Chaudhari
+
+            </a>
+
+          </p>
+
+        </div>
 
         <button
           className="footer__top"
           onClick={scrollToTop}
+          aria-label="Scroll to top"
         >
 
           <FaArrowUp />

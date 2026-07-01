@@ -14,30 +14,39 @@
 
   z-index: 1000;
 
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255,255,255,.72);
 
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 
-  -webkit-backdrop-filter: blur(18px);
-
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border:1px solid rgba(255,255,255,.55);
 
   border-radius: 22px;
 
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+  box-shadow:
+  0 10px 40px rgba(15,23,42,.08),
+  0 2px 12px rgba(37,99,235,.05);
+
+  overflow:hidden;
 
   transition: all .35s ease;
 }
 
 /* -------------------------------- */
 
-.navbar--scrolled {
+.navbar--scrolled{
 
-  top: 12px;
+top:12px;
 
-  background: rgba(255,255,255,.94);
+background:rgba(255,255,255,.82);
 
-  box-shadow: 0 18px 45px rgba(15,23,42,.12);
+backdrop-filter:blur(28px);
+
+-webkit-backdrop-filter:blur(28px);
+
+box-shadow:
+0 20px 60px rgba(15,23,42,.12),
+0 6px 18px rgba(37,99,235,.06);
 
 }
 
@@ -87,9 +96,19 @@
 
 }
 
+.navbar__link{
+
+  transition:
+    color .3s ease,
+    transform .3s ease;
+
+}
+
 .navbar__link:hover{
 
   color:$primary;
+
+  transform:translateY(-2px);
 
 }
 
@@ -105,7 +124,9 @@
 
   width:0;
 
-  height:2px;
+  height:3px;
+
+  border-radius:20px;
 
   background:$primary;
 
@@ -128,6 +149,11 @@
   color:$primary;
 
 }
+.navbar__link.active::after{
+
+  width:100%;
+
+}
 
 /* ======================================================
    ACTIONS
@@ -145,19 +171,23 @@
 
 .navbar__login{
 
-  color:$text-primary;
+    color:$text-primary;
 
-  text-decoration:none;
+    text-decoration:none;
 
-  font-weight:600;
+    font-weight:500;
 
-  transition:.3s;
+    letter-spacing:.2px;
+
+    transition:.3s;
 
 }
 
 .navbar__login:hover{
 
   color:$primary;
+
+  transform:translateY(-2px);
 
 }
 
@@ -264,5 +294,11 @@
     padding:16px 20px;
 
   }
+
+.navbar--scrolled .navbar__container{
+
+  padding:15px 30px;
+
+}
 
 }

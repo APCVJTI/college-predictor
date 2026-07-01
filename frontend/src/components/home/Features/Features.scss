@@ -1,85 +1,166 @@
 @use "../../../styles/abstracts/variables" as *;
 
-/* ===================================================
-   FEATURES
-=================================================== */
+/* ==================================================
+   FEATURES SECTION
+================================================== */
 
 .features {
-  padding: 120px 0;
+
+  position: relative;
+
+  padding: 130px 0;
+
   background: linear-gradient(
     180deg,
     #F8FAFC 0%,
     #FFFFFF 100%
   );
+
+  overflow: hidden;
+
 }
 
-/* ===================================================
+/* Decorative Background */
+
+.features::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-220px;
+
+  right:-220px;
+
+  width:520px;
+
+  height:520px;
+
+  border-radius:50%;
+
+  background:radial-gradient(
+    circle,
+    rgba(37,99,235,.08),
+    transparent 72%
+  );
+
+  pointer-events:none;
+
+}
+
+.features::after{
+
+  content:"";
+
+  position:absolute;
+
+  bottom:-180px;
+
+  left:-180px;
+
+  width:420px;
+
+  height:420px;
+
+  border-radius:50%;
+
+  background:radial-gradient(
+    circle,
+    rgba(6,182,212,.08),
+    transparent 72%
+  );
+
+  pointer-events:none;
+
+}
+
+/* ==================================================
    CONTAINER
-=================================================== */
+================================================== */
 
-.features__container {
+.features__container{
 
-  max-width: 1280px;
+  position:relative;
 
-  margin: 0 auto;
+  z-index:2;
 
-  padding: 0 40px;
+  max-width:1280px;
 
-  display: grid;
+  margin:auto;
 
-  grid-template-columns: 1fr 1fr;
+  padding:0 40px;
 
-  gap: 80px;
+  display:grid;
 
-  align-items: center;
+  grid-template-columns:1fr 1fr;
+
+  align-items:center;
+
+  gap:90px;
 
 }
 
-/* ===================================================
+/* ==================================================
    LEFT
-=================================================== */
+================================================== */
 
 .features__left{
 
-display:flex;
+  display:flex;
 
-align-items:center;
+  justify-content:flex-start;
 
 }
 
-/* ===================================================
+/* ==================================================
    RIGHT
-=================================================== */
+================================================== */
 
 .features__right{
 
-display:flex;
+  display:flex;
 
-justify-content:center;
+  justify-content:center;
 
-align-items:center;
+  align-items:center;
 
 }
 
-/* ===================================================
+/* ==================================================
    RESPONSIVE
-=================================================== */
+================================================== */
 
-@media(max-width:992px){
-
-.features{
-
-padding:90px 0;
-
-}
+@media(max-width:1100px){
 
 .features__container{
 
 grid-template-columns:1fr;
 
-gap:60px;
+gap:70px;
+
+}
+
+.features__left{
+
+justify-content:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.features{
+
+padding:95px 0;
+
+}
+
+.features__container{
 
 padding:0 24px;
+
+gap:55px;
 
 }
 

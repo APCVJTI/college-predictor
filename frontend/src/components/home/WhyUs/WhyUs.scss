@@ -1,121 +1,214 @@
 @use "../../../styles/abstracts/variables" as *;
 
+/* ==================================================
+   WHY US
+================================================== */
+
 .why-us {
-  padding: 100px 0;
-  background: #ffffff;
+
+  padding: 110px 0;
+
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F8FAFC 100%
+  );
+
 }
 
 .why-us__container {
+
   max-width: 1280px;
+
   margin: 0 auto;
+
   padding: 0 40px;
+
 }
 
+/* ==================================================
+   HEADER
+================================================== */
+
 .why-us__header {
+
   text-align: center;
+
   margin-bottom: 70px;
+
 }
 
 .why-us__badge {
-  display: inline-block;
-  padding: 10px 22px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 12px 22px;
+
   border-radius: 999px;
 
-  background: rgba(37, 99, 235, 0.08);
+  background: rgba(37,99,235,.08);
+
+  border: 1px solid rgba(37,99,235,.12);
 
   color: $primary;
 
+  font-size: .95rem;
+
   font-weight: 600;
 
-  margin-bottom: 20px;
+  letter-spacing: .3px;
+
+  margin-bottom: 22px;
+
 }
 
 .why-us__header h2 {
 
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
-
-  color: $text-primary;
+  font-size: clamp(2.5rem,5vw,3.6rem);
 
   font-weight: 800;
 
-  margin-bottom: 20px;
+  line-height: 1.15;
+
+  color: $text-primary;
+
+  margin-bottom: 22px;
 
 }
 
 .why-us__header h2 span {
 
-background: linear-gradient(
-  90deg,
-  #2563EB,
-  #06B6D4
-);
+  background: linear-gradient(
+    135deg,
+    #2563EB,
+    #06B6D4
+  );
 
-background-clip: text;
--webkit-background-clip: text;
+  background-clip: text;
+  -webkit-background-clip: text;
 
-color: transparent;
--webkit-text-fill-color: transparent;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 
 }
 
 .why-us__header p {
 
-  max-width: 700px;
+  max-width: 720px;
 
   margin: auto;
 
   color: $text-secondary;
 
-  font-size: 1.1rem;
+  font-size: 1.08rem;
 
-  line-height: 1.8;
+  line-height: 1.9;
 
 }
+
+/* ==================================================
+   GRID
+================================================== */
 
 .why-us__grid {
 
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4,1fr);
 
   gap: 30px;
 
 }
 
+/* ==================================================
+   CARD
+================================================== */
+
 .why-card {
 
-  background: white;
+  position: relative;
 
-  border-radius: 24px;
+  overflow: hidden;
 
-  padding: 28px;
+  padding: 32px;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.82);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
   border: 1px solid rgba(37,99,235,.08);
 
-  box-shadow: 0 20px 50px rgba(15,23,42,.06);
+  box-shadow:
+    0 20px 60px rgba(15,23,42,.06),
+    0 6px 20px rgba(37,99,235,.04);
 
-  transition: .3s ease;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+
+}
+
+.why-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 0;
+
+  height: 4px;
+
+  background: linear-gradient(
+    90deg,
+    #2563EB,
+    #06B6D4
+  );
+
+  transition: width .35s ease;
 
 }
 
-.why-card:hover{
+.why-card:hover {
 
-transform:translateY(-8px);
+  transform:
+    translateY(-10px)
+    scale(1.02);
 
-border-color:#2563EB;
+  border-color: rgba(37,99,235,.25);
 
-box-shadow:
-0 25px 60px rgba(37,99,235,.15);
+  box-shadow:
+    0 30px 80px rgba(15,23,42,.10),
+    0 10px 30px rgba(37,99,235,.10);
 
 }
+
+.why-card:hover::before {
+
+  width: 100%;
+
+}
+
+/* ==================================================
+   ICON
+================================================== */
 
 .why-card__icon {
 
-  width: 58px;
+  width: 64px;
 
-  height: 58px;
-
-  border-radius: 18px;
+  height: 64px;
 
   display: flex;
 
@@ -123,7 +216,9 @@ box-shadow:
 
   align-items: center;
 
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+
+  border-radius: 20px;
 
   background: linear-gradient(
     135deg,
@@ -133,55 +228,97 @@ box-shadow:
 
   color: white;
 
-  font-size: 1.4rem;
+  font-size: 1.55rem;
+
+  box-shadow:
+    0 15px 35px rgba(37,99,235,.22);
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
 
 }
+
+.why-card:hover .why-card__icon {
+
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+
+  box-shadow:
+    0 20px 40px rgba(37,99,235,.30);
+
+}
+
+/* ==================================================
+   TITLE
+================================================== */
 
 .why-card h3 {
 
-  font-size: 1.3rem;
+  font-size: 1.35rem;
+
+  font-weight: 700;
 
   color: $text-primary;
 
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 
 }
+
+/* ==================================================
+   DESCRIPTION
+================================================== */
 
 .why-card p {
 
   color: $text-secondary;
 
-  line-height: 1.7;
+  line-height: 1.8;
+
+  font-size: .98rem;
 
 }
 
-@media (max-width: 1100px) {
+/* ==================================================
+   RESPONSIVE
+================================================== */
 
-  .why-us__grid {
+@media (max-width:1100px){
 
-    grid-template-columns: repeat(2,1fr);
+  .why-us__grid{
+
+    grid-template-columns:repeat(2,1fr);
 
   }
 
 }
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-  .why-us {
+  .why-us{
 
-    padding: 80px 0;
-
-  }
-
-  .why-us__container {
-
-    padding: 0 24px;
+    padding:90px 0;
 
   }
 
-  .why-us__grid {
+  .why-us__container{
 
-    grid-template-columns: 1fr;
+    padding:0 24px;
+
+  }
+
+  .why-us__grid{
+
+    grid-template-columns:1fr;
+
+    gap:24px;
+
+  }
+
+  .why-card{
+
+    padding:28px;
 
   }
 

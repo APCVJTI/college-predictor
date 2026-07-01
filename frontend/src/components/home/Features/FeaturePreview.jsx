@@ -16,7 +16,7 @@ function FeaturePreview({ activeFeature }) {
             <span></span>
           </div>
 
-          <p>Live Product Preview</p>
+          <p>DSE Prediction Engine</p>
 
         </div>
 

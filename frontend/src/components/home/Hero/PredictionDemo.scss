@@ -1,150 +1,299 @@
 @use "../../../styles/abstracts/variables" as *;
 
+/* ==========================================
+   PREDICTION CARD
+========================================== */
+
 .prediction-card {
 
-    width: 420px;
+  position: relative;
 
-    background: white;
+  z-index: 1;
 
-    border-radius: 28px;
+  width: 430px;
 
-    padding: 32px;
+  padding: 34px;
 
-    background: rgba(255,255,255,.95);
+  background: rgba(255, 255, 255, .78);
 
-    backdrop-filter: blur(20px);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
 
-    border:1px solid rgba(37,99,235,.08);
+  border: 1px solid rgba(255, 255, 255, .55);
 
-    box-shadow:
-    0 25px 70px rgba(37,99,235,.10);
+  border-radius: 30px;
 
-}
+  overflow: hidden;
 
-.prediction-card__header{
+  box-shadow:
+    0 30px 80px rgba(15, 23, 42, .10),
+    0 8px 24px rgba(37, 99, 235, .08);
 
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  margin-bottom:28px;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
 
 }
 
-.live-dot{
+.prediction-card>* {
 
-  width:10px;
+  position: relative;
 
-  height:10px;
-
-  border-radius:50%;
-
-  background:#10B981;
+  z-index: 2;
 
 }
 
-.prediction-card__header p{
+.prediction-card::before {
 
-  color:$text-secondary;
+  content: "";
 
-  font-weight:600;
+  position: absolute;
 
-}
+  top: -120px;
 
-.prediction-card__percentage{
+  right: -120px;
 
-  font-size:4rem;
+  width: 220px;
 
-  font-weight:800;
+  height: 220px;
 
-  text-align:center;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, .18),
+    transparent 70%
+  );
 
-  margin-bottom:28px;
-
-background: linear-gradient(
-  90deg,
-  #2563EB,
-  #0EA5E9
-);
-
-background-clip: text;
--webkit-background-clip: text;
-
-color: transparent;
--webkit-text-fill-color: transparent;
+  pointer-events: none;
 
 }
 
-.prediction-card__divider{
+.prediction-card:hover {
 
-  height:1px;
+  transform: translateY(-8px);
 
-  background:#EEF2F7;
-
-  margin:22px 0;
-
-}
-
-.prediction-section h3{
-
-  font-size:1rem;
-
-  margin-bottom:16px;
-
-  color:$text-primary;
+  box-shadow:
+    0 40px 100px rgba(15, 23, 42, .12),
+    0 15px 35px rgba(37, 99, 235, .12);
 
 }
 
-.college{
+/* ==========================================
+   HEADER
+========================================== */
 
-  display:flex;
+.prediction-card__header {
 
-  align-items:center;
+  display: flex;
 
-  gap:12px;
+  align-items: center;
 
-  padding:10px 0;
+  gap: 10px;
 
-  color:$text-secondary;
-
-}
-
-.college svg{
-
-  color:#2563EB;
+  margin-bottom: 28px;
 
 }
 
-.prediction-card__footer{
+.live-dot {
 
-  margin-top:28px;
+  width: 10px;
 
-  display:flex;
+  height: 10px;
 
-  justify-content:center;
+  border-radius: 50%;
 
-  align-items:center;
+  background: #10B981;
 
-  gap:10px;
-
-  color:#10B981;
-
-  font-size:.9rem;
-
-  font-weight:600;
+  animation: pulse 2s infinite;
 
 }
 
-@media(max-width:992px){
+.prediction-card__header p {
 
-.prediction-card{
+  color: $text-secondary;
 
-width:100%;
-
-max-width:420px;
+  font-weight: 600;
 
 }
+
+/* ==========================================
+   LIVE PULSE
+========================================== */
+
+@keyframes pulse {
+
+  0% {
+
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, .55);
+
+  }
+
+  70% {
+
+    box-shadow: 0 0 0 12px rgba(16, 185, 129, 0);
+
+  }
+
+  100% {
+
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+
+  }
+
+}
+
+/* ==========================================
+   PERCENTAGE
+========================================== */
+
+.prediction-card__percentage {
+
+  font-size: 4.5rem;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  font-weight: 800;
+
+  text-align: center;
+
+  margin-bottom: 28px;
+
+  text-shadow:
+    0 10px 30px rgba(37, 99, 235, .18);
+
+  background: linear-gradient(
+    90deg,
+    #2563EB,
+    #0EA5E9
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.prediction-card__divider {
+
+  height: 1px;
+
+  margin: 22px 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 99, 235, .15),
+    transparent
+  );
+
+}
+
+/* ==========================================
+   SECTION TITLE
+========================================== */
+
+.prediction-section h3 {
+
+  font-size: .92rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  color: $primary;
+
+  margin-bottom: 18px;
+
+}
+
+/* ==========================================
+   COLLEGE ROW
+========================================== */
+
+.college {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 12px 16px;
+
+  margin-bottom: 10px;
+
+  border-radius: 14px;
+
+  background: rgba(248, 250, 252, .8);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+
+}
+
+.college:hover {
+
+  transform: translateX(8px);
+
+  background: white;
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, .08);
+
+}
+
+.college svg {
+
+  color: $primary;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.prediction-card__footer {
+
+  margin-top: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  color: #10B981;
+
+  font-size: .9rem;
+
+  font-weight: 600;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 992px) {
+
+  .prediction-card {
+
+    width: 100%;
+
+    max-width: 420px;
+
+  }
 
 }

@@ -23,7 +23,7 @@ const footerData = {
   ],
 
   contact: [
-    "support@dsepredictor.com",
+    "Coming Soon",
     "Maharashtra, India",
   ],
 
